@@ -1,0 +1,90 @@
+package Calculator;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Calculator_func cal = new Calculator_func();
+	 cal.operation();
+	}
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+package Calculator;
+
+import java.util.*;
+
+
+public class Calculator_func {
+	Scanner scan = new Scanner(System.in);
+	void operation() {
+		char user_input;
+		int run_state = 1;
+		while(run_state == 1)
+		{
+			System.out.println("계산을 수행합니다. Yes(y) or No(n)");
+			user_input = scan.next().charAt(0);
+			switch(user_input){
+				case 'y':
+				case 'Y':
+					 run_Calculator();
+					 break;
+				case 'N':
+				case 'n':	
+					run_state =0;
+					break;
+			}
+		}
+		
+	}
+	void run_Calculator() {
+		System.out.println("수식을 입력하세요.: ex) 2+3");
+		String user_input = scan.next();
+		int Num1, Num2;
+		char Symbol;
+		String regExp = "[^0-9]";
+		String[] formular = user_input.trim().split(regExp);
+		Num1 = Integer.valueOf(formular[0]);
+		Num2 = Integer.valueOf(formular[1]);
+		Symbol = (char)user_input.substring(formular[0].length(), formular[0].length()+1).charAt(0);
+		switch(Symbol)
+		{
+			case '+':
+				cal_plus(Num1, Num2);
+				break;
+			case '-':
+				cal_minus(Num1, Num2);
+				break;
+			case '*':
+				cal_mul(Num1, Num2);
+				break;
+			case '/':
+				cal_div(Num1, Num2);
+				break;
+			default :
+				System.out.println("수식을 잘못 입력하셨습니다.");
+				break;
+		}
+	}
+	void cal_plus(int n1, int n2) {
+		System.out.println(n1+n2);
+	}
+	void cal_minus(int n1, int n2) {
+		System.out.println(n1-n2);
+	}
+	
+	void cal_mul(int n1, int n2) {
+		System.out.println(n1*n2);
+	}
+	
+	void cal_div(int n1, int n2) {
+		try {
+		System.out.println(n1/n2);
+		System.out.print("..."+n1%n2);
+	}
+	catch(Exception e)
+		{
+			System.out.print("0으로 나눌 수 없습니다.");
+		}
+	}
+}
